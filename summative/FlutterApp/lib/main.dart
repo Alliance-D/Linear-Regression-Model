@@ -11,6 +11,7 @@ void main() {
 
 class CO2EmissionApp extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CO₂ Emission Predictor',
@@ -28,7 +29,224 @@ class CO2EmissionApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: CO2EmissionPredictor(),
+      home: HomePage(),
+      routes: {
+        '/predictor': (context) => CO2EmissionPredictor(),
+      },
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
+              Colors.green.shade100,
+            ],
+            stops: [0.0, 0.7, 1.0],
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 40),
+                
+                // App Logo/Icon
+                Container(
+                  padding: EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.eco,
+                    size: 80,
+                    color: Colors.white,
+                  ),
+                ),
+                
+                SizedBox(height: 32),
+                
+                // App Title
+                Text(
+                  'CO₂ Emission\nPredictor',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    height: 1.2,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(2.0, 2.0),
+                        blurRadius: 4.0,
+                        color: Colors.black26,
+                      ),
+                    ],
+                  ),
+                ),
+                
+                SizedBox(height: 16),
+                
+                // made by me text
+                Text(
+                  'Advanced AI-powered carbon footprint analysis',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white.withOpacity(0.9),
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                
+                SizedBox(height: 60),
+                
+                // Feature Cards
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _buildFeatureCard(
+                          context,
+                          Icons.analytics,
+                          'Accurate Predictions',
+                          'Get precise CO₂ emission forecasts using machine learning algorithms trained on comprehensive environmental data.',
+                        ),
+                        
+                        SizedBox(height: 16),
+                        
+                        _buildFeatureCard(
+                          context,
+                          Icons.speed,
+                          'Real-time Analysis',
+                          'Input your data and receive instant predictions with detailed breakdowns of emission sources.',
+                        ),
+                        
+                        SizedBox(height: 16),
+                        
+                        _buildFeatureCard(
+                          context,
+                          Icons.eco,
+                          'Environmental Impact',
+                          'Understand the environmental implications of different factors and make informed decisions.',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                SizedBox(height: 32),
+                
+                // Get Started Button
+                Container(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/predictor');
+                    },
+                    icon: Icon(Icons.arrow_forward, size: 24),
+                    label: Text(
+                      'Get Started',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Theme.of(context).colorScheme.primary,
+                      elevation: 8,
+                      shadowColor: Colors.black26,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+                
+                SizedBox(height: 20),
+                
+                // Version/Credits
+                Text(
+                  'Made by Dushime Alliance \n ALU',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildFeatureCard(BuildContext context, IconData icon, String title, String description) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.2),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 24,
+            ),
+          ),
+          SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white.withOpacity(0.8),
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -225,10 +443,14 @@ class _CO2EmissionPredictorState extends State<CO2EmissionPredictor>
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.pop(context),
+              ),
               flexibleSpace: FlexibleSpaceBar(
                 title: Text('CO₂ Emission Predictor',
                     style: TextStyle(
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                       shadows: [
                         Shadow(
@@ -238,7 +460,7 @@ class _CO2EmissionPredictorState extends State<CO2EmissionPredictor>
                         ),
                       ],
                     )),
-                titlePadding: EdgeInsets.only(left: 16, bottom: 65),
+                titlePadding: EdgeInsets.only(left: 16, bottom: 80),
                 background: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -253,7 +475,7 @@ class _CO2EmissionPredictorState extends State<CO2EmissionPredictor>
                   child: Center(
                     child: Icon(
                       Icons.eco,
-                      size: 70,
+                      size: 80,
                       color: Colors.white.withOpacity(0.3),
                     ),
                   ),
