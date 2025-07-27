@@ -9,7 +9,7 @@ import pandas as pd
 model = joblib.load('best_co2_model.joblib')
 scaler = joblib.load('co2_scaler.joblib')
 
-# List your model features here (in same order as training)
+#  model features 
 FEATURES = [
     'Year', 'Population', 'GDP PER CAPITA (USD)', 'GDP PER CAPITA PPP (USD)', 'Transportation (Mt)',
     'Other Fuel Combustion (Mt)', 'Manufacturing/Construction (Mt)', 'Land-Use Change and Forestry (Mt)',
@@ -17,7 +17,7 @@ FEATURES = [
     'Bunker Fuels (Mt)', 'Building (Mt)'
 ]
 
-# Pydantic input model with constraints (update ranges as appropriate for your data)
+# Pydantic input model with constraints 
 class CO2Input(BaseModel):
     Year: int = Field(..., ge=1990, le=2100)
     Population: int = Field(..., ge=0, le=2_000_000_000)
@@ -40,10 +40,10 @@ app = FastAPI(
     version="1.0"
 )
 
-# Add CORS middleware for all origins (allow from anywhere)
+# Add CORS middleware for all origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # Change this in production for better security!
+    allow_origins=["*"],   
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

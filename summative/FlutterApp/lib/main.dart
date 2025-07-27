@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// Replace this with your deployed Render API URL
+
 const String apiUrl = 'https://linear-regression-model-38av.onrender.com/predict';
 
 void main() {
