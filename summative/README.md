@@ -64,4 +64,6 @@ Source of the dataset;
 
 Kaggle: https://www.kaggle.com/datasets/ngaruniki/co2-emission-in-africa/data
 
+## link to youtube for video demo
 
+https://youtu.be/xqACAdRZLlk
